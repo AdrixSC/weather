@@ -1,3 +1,16 @@
+fetch('https://source.unsplash.com/1600x900/?day').then(function(response){
+    //console.log(response);
+    let imageUnSplash = response.url;
+    console.log(response.url);
+    return imageUnSplash;
+}).then(function(){
+    paintImage(imageUnSplash)
+    console.log("si entra")
+}).catch(function(){
+    console.log("no responde")
+})
+
+
 let proxy = 'https://cors-anywhere.herokuapp.com/';
 let urlDs = "https://api.darksky.net/forecast/0ba973c94674e3dd8956275146060534/37.8267,-122.4233";
 
@@ -18,6 +31,11 @@ const handleResponse = (data) => {
 const handleFailure = () => {
     console.log("volver a intentar")
 };
+
+const paintImage = (image) => {
+    let containerImage = document.getElementById("image");
+    containerImage.setAttribute = ("src", imageUnSplash);
+}
 
 const paintData = (wind, humidity, uvIndex, pressure) => {
     //traer elementos
