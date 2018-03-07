@@ -1,19 +1,4 @@
-fetch('https://source.unsplash.com/1600x900/?day').then(function(response){
-    //console.log(response);
-    let imageUnSplash = response.url;
-    console.log(response.url);
-    return imageUnSplash;
-}).then(function(){
-    paintImage(imageUnSplash)
-    console.log("si entra")
-}).catch(function(){
-    console.log("no responde")
-})
-
-
-let proxy = 'https://cors-anywhere.herokuapp.com/';
-let urlDs = "https://api.darksky.net/forecast/0ba973c94674e3dd8956275146060534/37.8267,-122.4233";
-
+//manipulando la data de darksky de la que obtuvimos respuesta
 const handleResponse = (data) => {
     console.log(data)
     let wind = data.currently.windGust;
@@ -32,11 +17,13 @@ const handleFailure = () => {
     console.log("volver a intentar")
 };
 
+//funcion para pintar imagen que obtuvimos de la api
 const paintImage = (image) => {
     let containerImage = document.getElementById("image");
     containerImage.setAttribute = ("src", imageUnSplash);
 }
 
+//funcion para pintar los datos que obtuvimos de darksky
 const paintData = (wind, humidity, uvIndex, pressure) => {
     //traer elementos
     let windElement = document.getElementById("data-wind");
@@ -52,37 +39,23 @@ const paintData = (wind, humidity, uvIndex, pressure) => {
 
 };
 
+//peticion para api unsplash
+fetch('https://source.unsplash.com/1600x900/?day').then(function(response){
+    //console.log(response);
+    let imageUnSplash = response.url;
+    console.log(response.url);
+    return imageUnSplash;
+}).then(function paintImage(imageUnSplash){
+    //paintImage(imageUnSplash)
+    console.log("si entra")
+}).catch(function(){
+    console.log("no responde")
+})
 
-// const dataWeather = (data) => {
-//     //let humidity = data.currently.humidity
-//     console.log(data.currently.humidity, "si entra")
-
-//     handleResponse(data)
-// }
-
-// dataWeather(data);
+//peticion para api darksky
+let proxy = 'https://cors-anywhere.herokuapp.com/'; //obteniendo el proxy
+let urlDs = "https://api.darksky.net/forecast/0ba973c94674e3dd8956275146060534/37.8267,-122.4233"; //url de la api
 
 $.ajax({
     url: proxy + urlDs,
 }).done(handleResponse).fail(handleFailure);
-
-//funcion para crear las peticiones
-function getImages() {
-    const flickRequest = new XMLHttpRequest(); //crear objeto
-    articleRequest.open("GET", `https://api.flickr.com/services/rest/?method=flickr.test.echo&name=value${searchedForText}&api-key=062d5b87868abb3d685ba16acd774cf7`); //metodo open para iniciar request
-    articleRequest.onload = addImages; // funcion ejecutada abajo en la que funciona la peticion
-    articleRequest.onerror = handleError; //funcion ejecutada abajo para mostrar en consola mensaje de error
-    articleRequest.send(); //envia peticion al servidor
-};
-
-function handleError() {
-    console.log("se ha producido un error");
-};
-
-//funcion para agregar noticias al html dependiendo del filtro de busqueda
-
-function addImages() {
-
-    const data = JSON.parse(this.responseText); //objeto de la data
-    console.log(data);
-};
