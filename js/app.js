@@ -1,14 +1,25 @@
 //manipulando la data de darksky de la que obtuvimos respuesta
 const handleResponse = (data) => {
-    console.log(data)
+    //console.log(data)
     let wind = data.currently.windGust;
-    console.log(wind);
+    //console.log(wind);
     let humidity = data.currently.humidity
-    console.log(humidity);
+    //console.log(humidity);
     let uvIndex = data.currently.uvIndex;
-    console.log(uvIndex);
-    let pressure = data.currently.pressure
-    console.log(pressure);
+    //console.log(uvIndex);
+    let pressure = data.currently.pressure;
+    //console.log(pressure);
+    let dataWeek = data.daily.data;
+    //console.log(dataWeek);
+    dataWeek.forEach(function(day){
+        //console.log(day);
+        let icon = day.icon;
+        console.log(icon);
+        let minHeigh = day.temperatureMin;
+        console.log(minHeigh);
+        let maxHeigh = day.temperatureMax;
+        console.log(maxHeigh);
+    })
 
     paintData(wind, humidity, uvIndex, pressure);
 };
@@ -37,15 +48,15 @@ const paintData = (wind, humidity, uvIndex, pressure) => {
 fetch('https://source.unsplash.com/1600x900/?day').then(function(response){
     //console.log(response);
     let imageUnSplash = response.url;
-    console.log(response.url);
+    //console.log(response.url);
     return imageUnSplash;
 }).then(function paintImage(imageUnSplash){
     //paintImage(imageUnSplash)
     let containerImage = document.getElementById("image");
     containerImage.src = imageUnSplash;
-    console.log("si entra")
+    //console.log("si entra")
 }).catch(function(){
-    console.log("no responde")
+    console.log("no responde la api")
 })
 
 //peticion para api darksky
