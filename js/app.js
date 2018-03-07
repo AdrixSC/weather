@@ -17,12 +17,6 @@ const handleFailure = () => {
     console.log("volver a intentar")
 };
 
-//funcion para pintar imagen que obtuvimos de la api
-const paintImage = (image) => {
-    let containerImage = document.getElementById("image");
-    containerImage.setAttribute = ("src", imageUnSplash);
-}
-
 //funcion para pintar los datos que obtuvimos de darksky
 const paintData = (wind, humidity, uvIndex, pressure) => {
     //traer elementos
@@ -47,6 +41,8 @@ fetch('https://source.unsplash.com/1600x900/?day').then(function(response){
     return imageUnSplash;
 }).then(function paintImage(imageUnSplash){
     //paintImage(imageUnSplash)
+    let containerImage = document.getElementById("image");
+    containerImage.src = imageUnSplash;
     console.log("si entra")
 }).catch(function(){
     console.log("no responde")
