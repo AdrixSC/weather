@@ -44,6 +44,24 @@ const paintData = (wind, humidity, uvIndex, pressure) => {
 
 };
 
+const predictionsOfTheWeek = () => {
+let sectionLocation = document.getElementsByClassName("show");
+let sectionPredictions = document.getElementsByClassName("hide");
+console.log(sectionLocation)
+
+let arraySectionLocation = Array.from(sectionLocation);
+console.log(arraySectionLocation)
+arraySectionLocation.forEach(function(index){
+    let remove = index.classList.remove("show")
+    console.log(remove)
+})
+
+}
+
+var btnPrediction = document.getElementById("predictions");
+btnPrediction.addEventListener("click", predictionsOfTheWeek);
+
+
 //peticion para api unsplash
 fetch('https://source.unsplash.com/1600x900/?day').then(function(response){
     //console.log(response);
