@@ -1,16 +1,41 @@
-let proxy = 'https://cors-anywhere.herokuapp.com/';
-let urlDs = "https://api.darksky.net/forecast/0ba973c94674e3dd8956275146060534/37.8267,-122.4233";
+// Geolocalización automatica con html5
+$(document).ready(function() {
+    getLocation()
+        //getPhoto()
+});
+
+// funcion de localizacion
+function getLocation() {
+    if (navigator.geolocation) {
+        console.log(navigator.geolocation)
+            // depende de la respuesta del usuario
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+
+    } else {
+        console.log('Geolocation is not suported by this browser')
+    }
+};
+
+function showPosition(position) {
+    console.log(position)
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log(latitude, longitude)
+    handleResponse(data)
+}
+
+function showError() {
+    alert('algo salio mal')
+}
 
 const handleResponse = (data) => {
     console.log(data)
+    let longitud = data.longitude;
+    let latitude = data.latitude;
     let wind = data.currently.windGust;
-    console.log(wind);
     let humidity = data.currently.humidity
-    console.log(humidity);
     let uvIndex = data.currently.uvIndex;
-    console.log(uvIndex);
-    let pressure = data.currently.pressure
-    console.log(pressure);
+    let pressure = data.currently.pressure;
 
     paintData(wind, humidity, uvIndex, pressure);
 };
@@ -34,16 +59,9 @@ const paintData = (wind, humidity, uvIndex, pressure) => {
 
 };
 
-
-// const dataWeather = (data) => {
-//     //let humidity = data.currently.humidity
-//     console.log(data.currently.humidity, "si entra")
-
-//     handleResponse(data)
-// }
-
-// dataWeather(data);
-
+//peticion de API Darksky
+let proxy = 'https://cors-anywhere.herokuapp.com/';
+let urlDs = "https://api.darksky.net/forecast/0ba973c94674e3dd8956275146060534/37.8267,-122.4233";
 $.ajax({
     url: proxy + urlDs,
 }).done(handleResponse).fail(handleFailure);
@@ -64,7 +82,6 @@ function handleError() {
 //funcion para agregar noticias al html dependiendo del filtro de busqueda
 
 function addImages() {
-
     const data = JSON.parse(this.responseText); //objeto de la data
     console.log(data);
 };
