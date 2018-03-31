@@ -49,19 +49,6 @@ const handleResponse = (data) => {
         let maxHeigh = day.temperatureMax;
         console.log(maxHeigh);
 
-        //(icon, minHeigh, maxHeigh)
-        //traer elementos
-        // let monday = document.getElementById("monday");
-        // let tuesday = document.getElementById("tuesday");
-        // let wednesday = document.getElementById("wednesday");
-        // let thursday = document.getElementById("thursday");
-        // let friday = document.getElementById("friday");
-        // let saturday = document.getElementById("saturday");
-        // let sunday = document.getElementById("sunday");
-
-        // monday.innerHTML = "min:" + minHeigh[0] + " " + "max:" + maxHeigh[0]
-        // tuesday.innerHTML = "min:" + minHeigh[1] + " " + "max:" + maxHeigh[1]
-
         paintPredictionsWeek(icon, minHeigh, maxHeigh)
 
     })
@@ -129,10 +116,10 @@ const paintPredictionsWeek = (icon, minHeigh, maxHeigh) => {
 
 
 //peticion para api unsplash
-fetch('https://source.unsplash.com/random').then(function(response1) {
+fetch('https://images.unsplash.com/random').then(function(response) {
     //console.log(response);
-    let imageUnSplash = response1.url;
-    //console.log(response.url);
+    let imageUnSplash = response.url;
+    console.log(response.url);
     return imageUnSplash;
 }).then(function paintImage(imageUnSplash) {
     paintImage(imageUnSplash)
